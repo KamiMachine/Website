@@ -1,0 +1,157 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+backend:
+  name: github
+  repo: KamiMachine/Website
+  branch: main
+  auth_methods:
+    - token
+
+locale: en
+
+media_folder: /public/images
+public_folder: /images
+
+collections:
+
+  # ==========================================
+  # BLOG
+  # ==========================================
+  - name: blog
+    label: Blog
+    label_singular: Blog Post
+    folder: /src/content/blog
+    extension: md
+    format: yaml-frontmatter
+    media_folder: ''
+    public_folder: './'
+    create: true
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: description, label: SEO Description, widget: text }
+      - { name: author, label: Author, widget: string }
+      - { name: role, label: Author Role, widget: string, required: false }
+      - { name: authorImage, label: Author Image, widget: image }
+      - { name: authorImageAlt, label: Author Image Alt, widget: string }
+      - { name: pubDate, label: Publish Date, widget: datetime, type: date }
+      - { name: cardImage, label: Featured Image, widget: image }
+      - { name: cardImageAlt, label: Featured Image Alt, widget: string }
+      - { name: readTime, label: Reading Time (minutes), widget: number, value_type: int }
+      - name: tags
+        label: Tags
+        widget: list
+        required: false
+      - { name: body, label: Content, widget: markdown }
+
+  # ==========================================
+  # PRODUCTS
+  # ==========================================
+  - name: products
+    label: Products
+    label_singular: Product
+    folder: /src/content/products
+    extension: md
+    format: yaml-frontmatter
+    media_folder: ''
+    public_folder: './'
+    create: true
+    fields:
+      - { name: title, label: Product Name, widget: string }
+      - { name: description, label: Product Description, widget: text }
+
+      - name: main
+        label: Main Information
+        widget: object
+        fields:
+          - { name: id, label: ID, widget: number, value_type: int }
+          - { name: content, label: Main Content, widget: text }
+          - { name: imgCard, label: Card Image, widget: image }
+          - { name: imgMain, label: Main Image, widget: image }
+          - { name: imgAlt, label: Image Alt Text, widget: string }
+
+      - name: tabs
+        label: Product Tabs
+        widget: list
+        fields:
+          - { name: id, label: ID, widget: string }
+          - { name: dataTab, label: Data Tab, widget: string }
+          - { name: title, label: Title, widget: string }
+
+      - name: longDescription
+        label: Long Description
+        widget: object
+        fields:
+          - { name: title, label: Title, widget: string }
+          - { name: subTitle, label: Subtitle, widget: text }
+          - { name: btnTitle, label: Button Text, widget: string }
+          - { name: btnURL, label: Button URL, widget: string }
+
+      - name: descriptionList
+        label: Description List
+        widget: list
+        fields:
+          - { name: title, label: Title, widget: string }
+          - { name: subTitle, label: Subtitle, widget: text }
+
+      - name: specificationsLeft
+        label: Left Specifications
+        widget: list
+        fields:
+          - { name: title, label: Title, widget: string }
+          - { name: subTitle, label: Value, widget: text }
+
+      - name: specificationsRight
+        label: Right Specifications
+        widget: list
+        required: false
+        fields:
+          - { name: title, label: Title, widget: string }
+          - { name: subTitle, label: Value, widget: text }
+
+      - name: tableData
+        label: Specification Tables
+        widget: list
+        required: false
+        fields:
+          - name: feature
+            label: Features
+            widget: list
+          - name: description
+            label: Description Rows
+            widget: list
+            field:
+              name: row
+              label: Row
+              widget: list
+              field:
+                name: cell
+                label: Cell
+                widget: string
+
+      - name: blueprints
+        label: Technical Blueprints
+        widget: object
+        fields:
+          - { name: first, label: Blueprint 1, widget: image, required: false }
+          - { name: second, label: Blueprint 2, widget: image, required: false }
+
+      - { name: body, label: Additional Content, widget: markdown }
+
+  # ==========================================
+  # INSIGHTS
+  # ==========================================
+  - name: insights
+    label: Insights
+    label_singular: Insight
+    folder: /src/content/insights
+    extension: md
+    format: yaml-frontmatter
+    media_folder: ''
+    public_folder: './'
+    create: true
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: description, label: Description, widget: text }
+      - { name: cardImage, label: Featured Image, widget: image }
+      - { name: cardImageAlt, label: Image Alt Text, widget: string }
+      - { name: body, label: Content, widget: markdown }
